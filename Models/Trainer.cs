@@ -5,7 +5,7 @@
         public int id { get; set; }
         public string name { get; set; }
         public int age { get; set; }
-        bool isActive { get; set; }
+        public bool isActive { get; set; }
         public ICollection<PokemonTrainerRelation> pokemonTrainerRelations { get; set; }
          
     }
