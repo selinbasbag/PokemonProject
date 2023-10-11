@@ -1,6 +1,6 @@
 ﻿using PokemonProject.Models;
 
-namespace PokemonProject.Interfaces
+namespace PokemonProject.Interface.Repository
 {
     public interface ITrainerRepository
     {

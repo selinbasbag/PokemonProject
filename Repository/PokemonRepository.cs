@@ -1,9 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PokemonProject.Interfaces;
+using PokemonProject.Interface.Repository;
 using PokemonProject.Models;
 
 namespace PokemonProject.Repository
 {
+
     public class PokemonRepository:IPokemonRepository
     {
         private readonly DataContext _context;
@@ -15,6 +16,7 @@ namespace PokemonProject.Repository
         public ICollection<Pokemon> getAllPokemons()
         {
             return _context.Pokemon.ToList();
+            
             
         }
 
@@ -31,7 +33,7 @@ namespace PokemonProject.Repository
 
         }
 
-        public void deletePokemon(int id)
+        public bool deletePokemon(int id)
         {
             var pokemon = _context.Pokemon.Where(x => x.id == id).Include(x=>x.pokemonTrainerRelations).FirstOrDefault();
             pokemon.isActive=false;
@@ -41,7 +43,7 @@ namespace PokemonProject.Repository
             }
             _context.Pokemon.Update(pokemon);
             _context.SaveChanges();
-
+            return true;
         }
 
         public void updatePokemon(Pokemon pokemon)

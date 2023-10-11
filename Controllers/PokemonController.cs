@@ -1,0 +1,69 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using PokemonProject.Interface.Service;
+using PokemonProject.Models;
+
+namespace PokemonProject.Controllers
+
+{
+    [Route("api/pokemon")]
+    [ApiController]
+    public class PokemonController : Controller
+    {
+        private readonly IPokemonService _pokemonService;
+        public PokemonController(IPokemonService pokemonService)
+        {
+            _pokemonService = pokemonService;
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult getPokemon(int id)
+        {
+            if (_pokemonService.getPokemon(id) == null)
+            {
+                return NoContent();
+            }
+            return Ok(_pokemonService.getPokemon(id));
+        }
+
+        [HttpGet("getAllPokemons")]
+        public IActionResult getAll()
+        {
+            if(_pokemonService.getAllPokemons() == null)
+            {
+                return NoContent();
+            }
+            return Ok(_pokemonService.getAllPokemons());
+        }
+
+        [HttpPost("createPokemon")]
+        public IActionResult createPokemon(Pokemon pokemon) 
+        {
+         _pokemonService.createPokemon(pokemon);
+            return Ok();
+        }
+
+        [HttpPut("updatePokemon")]
+        public IActionResult updatePokemon(Pokemon pokemon)
+        {
+            _pokemonService.updatePokemon(pokemon);
+            return Ok();
+        }
+
+        //it should check
+        [HttpDelete("DeletePokemon")]
+        public IActionResult deletePokemon(int id)
+        {
+            if (_pokemonService.getPokemon(id)==null )
+            {
+                return BadRequest();
+            }
+            _pokemonService.deletePokemon(id);
+            return Ok();
+        }
+
+
+
+
+
+    }
+}

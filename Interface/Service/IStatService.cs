@@ -1,8 +1,8 @@
 ﻿using PokemonProject.Models;
 
-namespace PokemonProject.Interfaces
+namespace PokemonProject.Interface.Service
 {
-    public interface IStatRepository
+    public interface IStatService
     {
         public void createStat(Stat stat);
         public Stat getStat(int id);

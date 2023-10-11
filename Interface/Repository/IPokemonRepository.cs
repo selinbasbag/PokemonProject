@@ -1,7 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using PokemonProject.Models;
+﻿using PokemonProject.Models;
 
-namespace PokemonProject.Interfaces
+namespace PokemonProject.Interface.Repository
 {
     public interface IPokemonRepository
     {
@@ -10,9 +9,9 @@ namespace PokemonProject.Interfaces
         public Pokemon getPokemon(int id);
         public ICollection<Pokemon> getAllPokemons();
         public void updatePokemon(Pokemon pokemon);
-        public void deletePokemon(int id);
-      
-        
+        public bool deletePokemon(int id);
+
+
 
 
     }

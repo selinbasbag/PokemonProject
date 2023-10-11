@@ -1,8 +1,8 @@
 ﻿using PokemonProject.Models;
 
-namespace PokemonProject.Interfaces
+namespace PokemonProject.Interface.Service
 {
-    public interface IPokemonTrainerRelationRepository
+    public interface IPokemonTrainerRelationService
     {
         public void createPokemonTrainerRelation(PokemonTrainerRelation pokemonTrainerRelation);
         public PokemonTrainerRelation getPokemonTrainerRelation(int id);

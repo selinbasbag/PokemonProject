@@ -1,5 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using PokemonProject;
+using PokemonProject.Interface.Repository;
+using PokemonProject.Interface.Service;
+using PokemonProject.Repository;
+using PokemonProject.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,7 +13,21 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddTransient<Seed>();
+//builder.Services.AddTransient<Seed>();
+
+builder.Services.AddScoped<IPokemonRepository, PokemonRepository>();
+builder.Services.AddScoped<ITrainerRepository, TrainerRepository>();
+builder.Services.AddScoped<IStatRepository, StatRepository>();
+builder.Services.AddScoped<ITypeRepository, TypeRepository>();
+builder.Services.AddScoped<IPokemonStatRelationRepository, PokemonStatRelationRepository>();
+builder.Services.AddScoped<IPokemonTypeRelationRepository, PokemonTypeRelationRepository>();
+builder.Services.AddScoped<IPokemonTrainerRelationRepository, PokemonTrainerRelationRepository>();
+
+builder.Services.AddScoped<IPokemonService, PokemonService>();
+/*builder.Services.AddScoped<IStatService, StatService>();
+builder.Services.AddScoped<ITypeService, TypeService>();
+builder.Services.AddScoped<ITrainerService, TrainerService>();*/
+ 
 builder.Services.AddDbContext<DataContext>(options =>
      {
          options.UseNpgsql(builder.Configuration.GetConnectionString("WebApiDatabase"));
