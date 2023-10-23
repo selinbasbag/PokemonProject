@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using PokemonProject.Models;
 using System.Diagnostics;
 
@@ -14,6 +15,7 @@ public class DataContext : DbContext
     protected override void OnConfiguring(DbContextOptionsBuilder options)
     {
         // connect to postgres with connection string from app settings
+        //options.UseLazyLoadingProxies();
         options.UseNpgsql(Configuration.GetConnectionString("WebApiDatabase"));
     }
     protected override void OnModelCreating(ModelBuilder modelBuilder)

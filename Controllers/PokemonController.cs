@@ -28,11 +28,12 @@ namespace PokemonProject.Controllers
         [HttpGet("getAllPokemons")]
         public IActionResult getAll()
         {
-            if(_pokemonService.getAllPokemons() == null)
+            var pokemons = _pokemonService.getAllPokemons();
+            if ( pokemons== null)
             {
                 return NoContent();
             }
-            return Ok(_pokemonService.getAllPokemons());
+            return Ok(pokemons);
         }
 
         [HttpPost("createPokemon")]

@@ -24,10 +24,11 @@ builder.Services.AddScoped<IPokemonTypeRelationRepository, PokemonTypeRelationRe
 builder.Services.AddScoped<IPokemonTrainerRelationRepository, PokemonTrainerRelationRepository>();
 
 builder.Services.AddScoped<IPokemonService, PokemonService>();
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 /*builder.Services.AddScoped<IStatService, StatService>();
 builder.Services.AddScoped<ITypeService, TypeService>();
 builder.Services.AddScoped<ITrainerService, TrainerService>();*/
- 
+
 builder.Services.AddDbContext<DataContext>(options =>
      {
          options.UseNpgsql(builder.Configuration.GetConnectionString("WebApiDatabase"));
