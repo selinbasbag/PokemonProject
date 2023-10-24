@@ -15,7 +15,7 @@ namespace PokemonProject.Service
             _pokemonrepository = pokemonRepository;
             _autoMapper = autoMapper;
         }
-
+         
         public ICollection<PokemonDto> getAllPokemons()
         {
             ICollection<PokemonDto> pokemonDtos = new List<PokemonDto>();
@@ -31,6 +31,7 @@ namespace PokemonProject.Service
         {
             return _autoMapper.Map<PokemonDto>(_pokemonrepository.getPokemon(id));
         }
+
         public void createPokemon(Pokemon pokemon)
         {
             _pokemonrepository.createPokemon(pokemon);

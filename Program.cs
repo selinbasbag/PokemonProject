@@ -25,9 +25,9 @@ builder.Services.AddScoped<IPokemonTrainerRelationRepository, PokemonTrainerRela
 
 builder.Services.AddScoped<IPokemonService, PokemonService>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-/*builder.Services.AddScoped<IStatService, StatService>();
+builder.Services.AddScoped<IStatService, StatService>();
 builder.Services.AddScoped<ITypeService, TypeService>();
-builder.Services.AddScoped<ITrainerService, TrainerService>();*/
+builder.Services.AddScoped<ITrainerService, TrainerService>();
 
 builder.Services.AddDbContext<DataContext>(options =>
      {

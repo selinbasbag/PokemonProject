@@ -1,38 +1,50 @@
-﻿using PokemonProject.Interface.Service;
+﻿using AutoMapper;
+using PokemonProject.Dtos;
+using PokemonProject.Interface.Repository;
+using PokemonProject.Interface.Service;
 using PokemonProject.Models;
+using PokemonProject.Repository;
 
 namespace PokemonProject.Service
 {
     public class PokemonStatRelationService : IPokemonStatRelationService
     {
-        private readonly IPokemonStatRelationService _pokemonStatRelationService;
-        public PokemonStatRelationService(IPokemonStatRelationService pokemonStatRelationService)
+        private readonly IPokemonStatRelationRepository _pokemonStatRelationRepository;
+        private readonly IMapper _autoMapper;
+        public PokemonStatRelationService(IPokemonStatRelationRepository pokemonStatRelationRepository,IMapper autoMapper)
         {
-                _pokemonStatRelationService = pokemonStatRelationService;
+            _pokemonStatRelationRepository= pokemonStatRelationRepository;
+            _autoMapper= autoMapper;
         }
         public void createPokemonStatRelation(PokemonStatRelation pokemonStatRelation)
         {
-            _pokemonStatRelationService.createPokemonStatRelation(pokemonStatRelation);
+            _pokemonStatRelationRepository.createPokemonStatRelation(pokemonStatRelation);
         }
 
         public void deletePokemonStatRelation(int id)
         {
-            _pokemonStatRelationService.deletePokemonStatRelation(id);
+            _pokemonStatRelationRepository.deletePokemonStatRelation(id);
         }
 
-        public ICollection<PokemonStatRelation> getAllPokemonStatRelations()
+        public ICollection<PokemonStatRelationDto> getAllPokemonStatRelations()
         {
-           return  _pokemonStatRelationService.getAllPokemonStatRelations();
+            ICollection<PokemonStatRelationDto> pokemonStatRelationDtos=new List<PokemonStatRelationDto>();
+            ICollection<PokemonStatRelation> pokemonStatRelations= _pokemonStatRelationRepository.getAllPokemonStatRelations();
+            foreach (var item in pokemonStatRelations)
+            {
+                pokemonStatRelationDtos.Add(_autoMapper.Map<PokemonStatRelationDto>(item));
+            }
+            return pokemonStatRelationDtos;
         }
 
-        public PokemonStatRelation getPokemonStatRelation(int id)
+        public PokemonStatRelationDto getPokemonStatRelation(int id)
         {
-            return _pokemonStatRelationService.getPokemonStatRelation(id);
+            return _autoMapper.Map<PokemonStatRelationDto>(_pokemonStatRelationRepository.getPokemonStatRelation(id));
         }
 
         public void updatePokemonStatRelation(PokemonStatRelation pokemonStatRelation)
         {
-            _pokemonStatRelationService.updatePokemonStatRelation(pokemonStatRelation);
+            _pokemonStatRelationRepository.updatePokemonStatRelation(pokemonStatRelation);
         }
     }
 }

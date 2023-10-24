@@ -18,24 +18,26 @@ namespace PokemonProject.Controllers
         [HttpGet("{id}")]
         public IActionResult getStat(int id)
         {
-            if (_statService.getStat(id) == null)
+            var stat = _statService.getStat(id);
+            if (stat == null)
             {
                 return NoContent();
             }
-            return Ok(_statService.getStat(id));
+            return Ok(stat);
         }
 
         [HttpGet("getAll")]
         public IActionResult getAllStats()
         {
-            if (_statService.getAllStats() == null)
+            var stats = _statService.getAllStats();
+            if (stats == null)
             {
                 return NoContent();
             }
-            return Ok(_statService.getAllStats());
+            return Ok(stats);
         }
 
-        [HttpPost("cerate")]
+        [HttpPost("create")]
         public IActionResult createStat(Stat stat)
         {
             _statService.createStat(stat);

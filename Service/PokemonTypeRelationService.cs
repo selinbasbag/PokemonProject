@@ -1,38 +1,49 @@
-﻿using PokemonProject.Interface.Service;
+﻿using AutoMapper;
+using PokemonProject.Dtos;
+using PokemonProject.Interface.Repository;
+using PokemonProject.Interface.Service;
 using PokemonProject.Models;
 
 namespace PokemonProject.Service
 {
     public class PokemonTypeRelationService : IPokemonTypeRelationService
     {
-        private readonly IPokemonTypeRelationService _pokemonTypeRelationService;
-        public PokemonTypeRelationService(IPokemonTypeRelationService pokemonTypeRelationService)
+        private readonly IPokemonTypeRelationRepository _pokemonTypeRelationRepository;
+        private readonly IMapper _autoMapper;
+        public PokemonTypeRelationService(IPokemonTypeRelationRepository pokemonTypeRelationRepository, IMapper autoMapper)
         {
-                _pokemonTypeRelationService = pokemonTypeRelationService;
+            _pokemonTypeRelationRepository = pokemonTypeRelationRepository;
+            _autoMapper = autoMapper;
         }
         public void createPokemonTypeRelation(PokemonTypeRelation pokemonTypeRelation)
         {
-            _pokemonTypeRelationService.createPokemonTypeRelation(pokemonTypeRelation); 
+            _pokemonTypeRelationRepository.createPokemonTypeRelation(pokemonTypeRelation);
         }
 
         public void deletePokemonTypeRelation(int id)
         {
-            _pokemonTypeRelationService.deletePokemonTypeRelation(id);
+            _pokemonTypeRelationRepository.deletePokemonTypeRelation(id);
         }
 
-        public ICollection<PokemonTypeRelation> getAllPokemonTypeRelations()
+        public ICollection<PokemonTypeRelationDto> getAllPokemonTypeRelations()
         {
-            return _pokemonTypeRelationService.getAllPokemonTypeRelations();
+            ICollection<PokemonTypeRelationDto > pokemonTypeRelationDtos=new List<PokemonTypeRelationDto>();
+            ICollection<PokemonTypeRelation>pokemonTypeRelations= _pokemonTypeRelationRepository.getAllPokemonTypeRelations();
+            foreach (var item in pokemonTypeRelations)
+            {
+                pokemonTypeRelationDtos.Add(_autoMapper.Map<PokemonTypeRelationDto>(item));
+            }
+            return pokemonTypeRelationDtos;
         }
 
-        public PokemonTypeRelation getPokemonTypeRelation(int id)
+        public PokemonTypeRelationDto getPokemonTypeRelation(int id)
         {
-            return _pokemonTypeRelationService.getPokemonTypeRelation(id);
+            return _autoMapper.Map<PokemonTypeRelationDto>(_pokemonTypeRelationRepository.getPokemonTypeRelation(id));
         }
 
         public void updatePokemonTypeRelation(PokemonTypeRelation pokemonTypeRelation)
         {
-            _pokemonTypeRelationService.updatePokemonTypeRelation(pokemonTypeRelation);
+            _pokemonTypeRelationRepository.updatePokemonTypeRelation(pokemonTypeRelation);
         }
     }
 }

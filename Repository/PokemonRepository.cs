@@ -23,7 +23,7 @@ namespace PokemonProject.Repository
         public Pokemon getPokemon(int id)
         {
             return _context.Pokemon.
-                Where(x => x.id == id).FirstOrDefault();
+                Where(x => x.id == id).Include(x=>x.pokemonStatRelations).FirstOrDefault();
         }
 
         public void createPokemon(Pokemon pokemon)

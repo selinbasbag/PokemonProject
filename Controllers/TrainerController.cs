@@ -18,21 +18,23 @@ namespace PokemonProject.Controllers
         [HttpGet("{id}")]
         public IActionResult getTrainer(int id)
         {
-            if (_trainerService.getTrainer(id) == null)
+            var trainer = _trainerService.getTrainer(id);
+            if ( trainer== null)
             {
                 return NotFound();
             }
-            return Ok(_trainerService.getTrainer(id));
+            return Ok(trainer);
         }
 
         [HttpGet("getAll")]
         public IActionResult getAllTrainers()
         {
-            if (_trainerService.getAllTrainers() == null)
+            var trainers = _trainerService.getAllTrainers();
+            if (trainers == null)
             {
                 return NotFound();
             }
-            return Ok(_trainerService.getAllTrainers());
+            return Ok(trainers);
         }
         [HttpPost("create")]
         public IActionResult createTrainer(Trainer trainer)

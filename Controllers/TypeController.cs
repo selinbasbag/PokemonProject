@@ -9,8 +9,8 @@ namespace PokemonProject.Controllers
     [ApiController]
     public class TypeController : Controller
     {
-        private readonly TypeService _typeService;
-        public TypeController(TypeService TypeService)
+        private readonly ITypeService _typeService;
+        public TypeController(ITypeService TypeService)
         {
             _typeService = TypeService;
         }
@@ -18,22 +18,23 @@ namespace PokemonProject.Controllers
         [HttpGet("{id}")]
         public IActionResult getType(int id)
         {
-            if (_typeService.getType(id) == null)
+            var type = _typeService.getType(id);
+            if (type == null)
             {
                 return NotFound();
             }
-            _typeService.getType(id);
-            return Ok();
+            return Ok(type);
         }
 
         [HttpGet("getAll")]
         public IActionResult getAllTypes()
         {
-            if (_typeService.getAllTypes() == null)
+            var types= _typeService.getAllTypes();
+            if (types == null)
             {
                 return NoContent();
             }
-            return Ok(_typeService.getAllTypes());
+            return Ok(types);
         }
 
         [HttpPost("create")]

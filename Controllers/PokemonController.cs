@@ -18,11 +18,12 @@ namespace PokemonProject.Controllers
         [HttpGet("{id}")]
         public IActionResult getPokemon(int id)
         {
-            if (_pokemonService.getPokemon(id) == null)
+            var pokemon = _pokemonService.getPokemon(id);
+            if (pokemon == null)
             {
                 return NoContent();
             }
-            return Ok(_pokemonService.getPokemon(id));
+            return Ok(pokemon);
         }
 
         [HttpGet("getAllPokemons")]

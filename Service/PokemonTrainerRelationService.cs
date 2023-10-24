@@ -1,38 +1,49 @@
-﻿using PokemonProject.Interface.Service;
+﻿using AutoMapper;
+using PokemonProject.Dtos;
+using PokemonProject.Interface.Repository;
+using PokemonProject.Interface.Service;
 using PokemonProject.Models;
 
 namespace PokemonProject.Service
 {
     public class PokemonTrainerRelationService : IPokemonTrainerRelationService
     {
-        private readonly IPokemonTrainerRelationService _pokemonTrainerRelationService;
-        public PokemonTrainerRelationService(IPokemonTrainerRelationService pokemonTrainerRelationService)
+        private readonly IPokemonTrainerRelationRepository _pokemonTrainerRelationRepository;
+        private readonly IMapper _autoMapper;
+        public PokemonTrainerRelationService(IPokemonTrainerRelationRepository pokemonTrainerRelationRepository, IMapper autoMapper)
         {
-                _pokemonTrainerRelationService = pokemonTrainerRelationService;
+            _pokemonTrainerRelationRepository = pokemonTrainerRelationRepository;
+            _autoMapper = autoMapper;
         }
         public void createPokemonTrainerRelation(PokemonTrainerRelation pokemonTrainerRelation)
         {
-            _pokemonTrainerRelationService.createPokemonTrainerRelation(pokemonTrainerRelation);
+            _pokemonTrainerRelationRepository.createPokemonTrainerRelation(pokemonTrainerRelation);
         }
 
         public void deletePokemonTrainerRelation(int id)
         {
-            _pokemonTrainerRelationService.deletePokemonTrainerRelation(id);
+            _pokemonTrainerRelationRepository.deletePokemonTrainerRelation(id);
         }
 
-        public ICollection<PokemonTrainerRelation> getAllPokemonTrainerRelations()
+        public ICollection<PokemonTrainerRelationDto> getAllPokemonTrainerRelations()
         {
-            return _pokemonTrainerRelationService.getAllPokemonTrainerRelations();
+            ICollection<PokemonTrainerRelationDto> pokemonTrainerRelationDtos = new List<PokemonTrainerRelationDto>();
+            ICollection<PokemonTrainerRelation> pokemonTrainerRelations = _pokemonTrainerRelationRepository.getAllPokemonTrainerRelations();
+            foreach (var item in pokemonTrainerRelations)
+            {
+                pokemonTrainerRelationDtos.Add(_autoMapper.Map<PokemonTrainerRelationDto>(item));
+            }
+            return pokemonTrainerRelationDtos;
         }
 
-        public PokemonTrainerRelation getPokemonTrainerRelation(int id)
+        public PokemonTrainerRelationDto getPokemonTrainerRelation(int id)
         {
-            return _pokemonTrainerRelationService.getPokemonTrainerRelation(id);
+            return _autoMapper.Map< PokemonTrainerRelationDto>(_pokemonTrainerRelationRepository.getPokemonTrainerRelation(id));
         }
 
         public void updatePokemonTrainerRelation(PokemonTrainerRelation pokemonTrainerRelation)
         {
-            _pokemonTrainerRelationService.updatePokemonTrainerRelation(pokemonTrainerRelation);
+            _pokemonTrainerRelationRepository.updatePokemonTrainerRelation(pokemonTrainerRelation);
         }
     }
 }
