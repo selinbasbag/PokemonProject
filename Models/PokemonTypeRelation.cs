@@ -6,6 +6,6 @@
         public Pokemon pokemon { get; set; }
         public int pokemonId { get; set; }
         public int typeId { get; set; }
-        virtual public Type type { get; set; }
+        public Type type { get; set; }
     }
 }

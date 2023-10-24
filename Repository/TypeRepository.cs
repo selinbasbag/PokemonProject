@@ -18,7 +18,7 @@ namespace PokemonProject.Repository
 
         public Models.Type getType(int id)
         {
-            return _context.Type.Where(x => x.id == id).FirstOrDefault();
+            return _context.Type.Where(x => x.id == id).Include(x=>x.pokemonTypeRelations).ThenInclude(y=>y.pokemon).FirstOrDefault();
 
         }
 

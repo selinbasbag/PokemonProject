@@ -23,7 +23,9 @@ namespace PokemonProject.Repository
         public Pokemon getPokemon(int id)
         {
             return _context.Pokemon.
-                Where(x => x.id == id).Include(x=>x.pokemonStatRelations).FirstOrDefault();
+                Where(x => x.id == id).Include(x=>x.pokemonStatRelations).ThenInclude(y=>y.stat)
+                .Include(z=>z.pokemonTypeRelations).ThenInclude(t=>t.type).
+                Include(a=>a.pokemonTrainerRelations).ThenInclude(b=>b.trainer).FirstOrDefault();
         }
 
         public void createPokemon(Pokemon pokemon)

@@ -15,7 +15,7 @@ namespace PokemonProject.Repository
         public Trainer getTrainer(int id)
         {
             return _context.Trainer.
-                Where(x => x.id == id).FirstOrDefault();
+                Where(x => x.id == id).Include(x=>x.pokemonTrainerRelations).ThenInclude(y=>y.pokemon).FirstOrDefault();
         }
 
         public ICollection<Trainer> getAllTrainers()

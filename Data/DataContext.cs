@@ -15,7 +15,7 @@ public class DataContext : DbContext
     protected override void OnConfiguring(DbContextOptionsBuilder options)
     {
         // connect to postgres with connection string from app settings
-        //options.UseLazyLoadingProxies();
+     //   options.UseLazyLoadingProxies();
         options.UseNpgsql(Configuration.GetConnectionString("WebApiDatabase"));
     }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
