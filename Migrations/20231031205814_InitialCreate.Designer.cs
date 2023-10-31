@@ -10,7 +10,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace PokemonProject.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20231009183626_InitialCreate")]
+    [Migration("20231031205814_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />

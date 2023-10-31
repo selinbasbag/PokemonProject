@@ -3,7 +3,7 @@ using Microsoft.Extensions.Options;
 using PokemonProject.Models;
 using System.Diagnostics;
 
-public class DataContext : DbContext
+public class DataContext :DbContext 
 {
     protected readonly IConfiguration Configuration;
 

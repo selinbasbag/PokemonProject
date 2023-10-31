@@ -20,7 +20,7 @@ builder.Services.AddControllers().AddNewtonsoftJson(x =>
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-//builder.Services.AddTransient<Seed>();
+builder.Services.AddTransient<Seed>();
 
 builder.Services.AddScoped<IPokemonRepository, PokemonRepository>();
 builder.Services.AddScoped<ITrainerRepository, TrainerRepository>();

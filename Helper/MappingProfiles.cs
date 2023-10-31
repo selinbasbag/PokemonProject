@@ -18,7 +18,9 @@ namespace PokemonReviewApp.Helper
             CreateMap<PokemonTypeRelation, PokemonTypeRelationDto>();
             CreateMap<PokemonProject.Models.Type, TypeDto>();
             CreateMap<Trainer, TrainerDto>();
-            
+            CreateMap<Pokemon, IndirectlyPokemonDto>();
+
+
 
         }
     }

@@ -6,7 +6,7 @@
         public string name { get; set; }
         public int age { get; set; }
         public bool isActive { get; set; }
-        public ICollection<PokemonTrainerRelationDto> pokemonTrainerRelations { get; set; }
+        public ICollection<IndirectlyPokemonDto> indirectlyPokemonDtos { get; set; }
          
     }
 }
